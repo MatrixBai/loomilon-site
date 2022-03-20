@@ -118,11 +118,11 @@ exports.createPages = async ({ actions,createContentDigest, getNode, graphql }) 
     console.error(projectImageResult.errors)
   }
 
-  Debug("Images", projectImageResult.data)
+  // Debug("Images", projectImageResult.data)
 
-  projectImageResult.data.images.nodes.forEach((node) =>{
-    console.debug(node.relativePath)
-  })
+  // projectImageResult.data.images.nodes.forEach((node) =>{
+  //   console.debug(node.relativePath)
+  // })
 
   const mdResult = await graphql(`
     {
@@ -152,11 +152,11 @@ exports.createPages = async ({ actions,createContentDigest, getNode, graphql }) 
   }
 
   mdResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    console.debug("slug " + node.frontmatter.slug)
+    // console.debug("slug " + node.frontmatter.slug)
 
     const images =[]
     projectImageResult.data.images.nodes.forEach((imageNode) => {
-      console.debug("relativePath " + imageNode.relativePath)
+      // console.debug("relativePath " + imageNode.relativePath)
       if (imageNode.relativePath.startsWith(node.frontmatter.slug.substring(1))){
         images.push(imageNode.childImageSharp);
       }
@@ -180,12 +180,12 @@ exports.createPages = async ({ actions,createContentDigest, getNode, graphql }) 
     })
 
     var projNode = getNode(projId)
-    Debug("Proj Node", projNode)
+    // Debug("Proj Node", projNode)
   })
 
 
   mdResult.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    console.debug("slug " + node.frontmatter.slug)
+    // console.debug("slug " + node.frontmatter.slug)
     
     var projId = "proj_" + node.frontmatter.slug.substring(1)
     var projNode = getNode(projId)
